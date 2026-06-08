@@ -11,12 +11,12 @@ surprising about Zig** — and then you write code.
 - Manage memory explicitly with allocators (and let the compiler catch your leaks).
 - Use the standard library's core data structures and the `comptime` generics that power them.
 - Stand up a real project with `build.zig`, and pull in **open-source packages**.
-- Write basic concurrent code with threads, mutexes, atomics, and a thread pool.
+- Write basic concurrent code with OS threads and atomics, dodging data races by partitioning work.
 
 ## Pinned to Zig 0.16.0
 
 Zig is pre-1.0. The language, the standard library, and the build system change in meaningful
-ways between releases — code written for 0.13 often won't compile on 0.15. **This course is
+ways between releases — code written for 0.14 often won't compile on 0.16. **This course is
 pinned to Zig 0.16.0.** Install exactly that version:
 
 ```console

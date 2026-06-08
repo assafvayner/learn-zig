@@ -1,4 +1,4 @@
-# Chapter 0 — Setup & Hello
+# Setup & Hello
 
 ## Verify your install
 

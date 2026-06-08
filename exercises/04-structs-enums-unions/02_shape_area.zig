@@ -1,6 +1,6 @@
 //! Chapter 4 — Structs, Enums & Unions
 //! Task: define a tagged union Shape and an area function using switch with captures.
-//! Run: zig run solutions/04-structs-enums-unions/02_shape_area.zig
+//! Run: zig run exercises/04-structs-enums-unions/02_shape_area.zig
 //! Expected output:
 //!   circle area = 12.57
 //!   rect area   = 12.00

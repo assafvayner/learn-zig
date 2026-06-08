@@ -1,6 +1,6 @@
 //! Chapter 3 — Arrays, Slices & Strings
 //! Task: count whitespace-separated words using std.mem.tokenizeScalar.
-//! Run: zig run solutions/03-arrays-slices-strings/02_word_count.zig
+//! Run: zig run exercises/03-arrays-slices-strings/02_word_count.zig
 //! Expected output:
 //!   4
 

@@ -3,7 +3,7 @@
 //!       std.testing.allocator fails the test automatically if any allocation
 //!       is not freed — remove the free call to see that failure in action.
 //!
-//! Run: zig test 03_leak_test.zig
+//! Run: zig test exercises/05-memory-allocators/03_leak_test.zig
 //! Expected output:
 //!   All 2 tests passed.
 

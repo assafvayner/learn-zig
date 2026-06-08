@@ -1,6 +1,6 @@
 //! Chapter 6 — Data Structures & the Standard Library
 //! Exercise 04: Parse JSON into a struct with std.json
-//! Run: zig run solutions/06-data-structures-std/04_json.zig
+//! Run: zig run exercises/06-data-structures-std/04_json.zig
 //! Expected output:
 //!   name=zig year=2026
 

@@ -4,7 +4,7 @@
 //! Rule: n → n/2 if even, 3n+1 if odd.
 //! Print `27 reaches 1 in <count> steps` and assert the count equals 111.
 //!
-//! Run: zig run solutions/01-basics/03_collatz.zig
+//! Run: zig run exercises/01-basics/03_collatz.zig
 //!
 //! Expected output:
 //! 27 reaches 1 in 111 steps

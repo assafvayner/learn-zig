@@ -4,7 +4,7 @@
 //!       head, and print values space-separated on one line.
 //!       arena.deinit() frees all nodes at once — no individual frees needed.
 //!
-//! Run: zig run 02_linked_list.zig
+//! Run: zig run exercises/05-memory-allocators/02_linked_list.zig
 //! Expected output:
 //!   3 2 1
 

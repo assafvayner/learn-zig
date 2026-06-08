@@ -1,6 +1,6 @@
 //! Chapter 3 — Arrays, Slices & Strings
 //! Task: Caesar-shift "Hello, Zig!" by 3, wrapping within each letter case.
-//! Run: zig run solutions/03-arrays-slices-strings/04_caesar.zig
+//! Run: zig run exercises/03-arrays-slices-strings/04_caesar.zig
 //! Expected output:
 //!   Khoor, Clj!
 

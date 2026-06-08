@@ -1,6 +1,6 @@
 //! Chapter 6 — Data Structures & the Standard Library
 //! Exercise 02: Word frequency with StringHashMap, sorted output
-//! Run: zig run solutions/06-data-structures-std/02_word_freq.zig
+//! Run: zig run exercises/06-data-structures-std/02_word_freq.zig
 //! Expected output:
 //!   the: 3
 //!   cat: 2

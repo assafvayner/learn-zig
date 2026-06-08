@@ -8,8 +8,6 @@ This chapter is three small projects, each consuming a real third-party library:
 - **9.2 bouncing balls** — a window built on **raylib**, a native C library.
 - **9.3 quote API** — a JSON server built on **httpz**, pure Zig.
 
-> Pinned to Zig **0.16.0**.
-
 ---
 
 ## How the package manager works

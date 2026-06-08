@@ -4,7 +4,7 @@
 //! using a `switch` on ranges into: freezing (<0), cold (0..14), mild (15..27),
 //! hot (>=28). Print `<temp>: <label>` per line.
 //!
-//! Run: zig run solutions/01-basics/02_classify.zig
+//! Run: zig run exercises/01-basics/02_classify.zig
 //!
 //! Expected output:
 //! -5: freezing

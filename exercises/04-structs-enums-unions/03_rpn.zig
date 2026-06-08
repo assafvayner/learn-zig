@@ -1,6 +1,6 @@
 //! Chapter 4 — Structs, Enums & Unions
 //! Task: evaluate a reverse-Polish expression using a fixed array as a stack.
-//! Run: zig run solutions/04-structs-enums-unions/03_rpn.zig
+//! Run: zig run exercises/04-structs-enums-unions/03_rpn.zig
 //! Expected output:
 //!   result = 35
 

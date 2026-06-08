@@ -1,6 +1,6 @@
 //! Chapter 4 — Structs, Enums & Unions
 //! Task: define a Vec2 struct with add, dot, and length methods; exercise them in main.
-//! Run: zig run solutions/04-structs-enums-unions/01_vec2.zig
+//! Run: zig run exercises/04-structs-enums-unions/01_vec2.zig
 //! Expected output:
 //!   a+b = (4.00, 6.00)
 //!   a·b = 11.00

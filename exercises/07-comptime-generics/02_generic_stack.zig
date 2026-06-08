@@ -1,6 +1,6 @@
 //! Chapter 7 — Comptime & Generics
 //! Task: Implement a generic fixed-capacity Stack using the fn-returns-type idiom.
-//! Run: zig run solutions/07-comptime-generics/02_generic_stack.zig
+//! Run: zig run exercises/07-comptime-generics/02_generic_stack.zig
 //! Expected output:
 //!   30
 //!   20

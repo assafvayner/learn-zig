@@ -1,7 +1,7 @@
 //! Chapter 7 — Comptime & Generics
 //! Task: Build a Fibonacci table at compile time using a labeled block at file scope,
 //!       then verify and print an entry at runtime.
-//! Run: zig run solutions/07-comptime-generics/03_comptime_table.zig
+//! Run: zig run exercises/07-comptime-generics/03_comptime_table.zig
 //! Expected output:
 //!   fib[10] = 55
 

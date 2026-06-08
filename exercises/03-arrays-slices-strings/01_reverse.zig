@@ -1,6 +1,6 @@
 //! Chapter 3 — Arrays, Slices & Strings
 //! Task: reverse the bytes of "zig" and print the result.
-//! Run: zig run solutions/03-arrays-slices-strings/01_reverse.zig
+//! Run: zig run exercises/03-arrays-slices-strings/01_reverse.zig
 //! Expected output:
 //!   giz
 

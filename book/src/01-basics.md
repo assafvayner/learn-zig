@@ -122,3 +122,11 @@ outer: for (0..5) |i| {
 ```
 
 This is Zig's primary resource-cleanup mechanism; there is no RAII, no destructors.
+
+## Exercises
+
+- `01_fizzbuzz.zig` — print 1..=20, with `Fizz`/`Buzz`/`FizzBuzz` for multiples of 3/5/both.
+- `02_classify.zig` — label a list of temperatures using a range `switch`.
+- `03_collatz.zig` — count the Collatz steps from 27 (and assert it reaches 1 in 111).
+
+Run each with `zig run exercises/01-basics/<file>`.

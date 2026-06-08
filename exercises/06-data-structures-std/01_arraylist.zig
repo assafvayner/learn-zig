@@ -1,6 +1,6 @@
 //! Chapter 6 — Data Structures & the Standard Library
 //! Exercise 01: ArrayList — collect squares of 1..=5
-//! Run: zig run solutions/06-data-structures-std/01_arraylist.zig
+//! Run: zig run exercises/06-data-structures-std/01_arraylist.zig
 //! Expected output:
 //!   { 1, 4, 9, 16, 25 }
 

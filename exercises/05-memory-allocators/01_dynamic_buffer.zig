@@ -4,7 +4,7 @@
 //!       The defer on gpa.deinit() demonstrates leak detection: remove the
 //!       free and it will print a leak report.
 //!
-//! Run: zig run 01_dynamic_buffer.zig
+//! Run: zig run exercises/05-memory-allocators/01_dynamic_buffer.zig
 //! Expected output:
 //!   abcde
 

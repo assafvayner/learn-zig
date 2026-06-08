@@ -4,7 +4,7 @@
 //! multiples of 5, and `FizzBuzz` for multiples of both — one per line.
 //! Use `for (1..21) |i|`.
 //!
-//! Run: zig run solutions/01-basics/01_fizzbuzz.zig
+//! Run: zig run exercises/01-basics/01_fizzbuzz.zig
 //!
 //! Expected output:
 //! 1

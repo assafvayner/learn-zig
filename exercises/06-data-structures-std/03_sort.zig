@@ -1,6 +1,6 @@
 //! Chapter 6 — Data Structures & the Standard Library
 //! Exercise 03: Sort an array of i32 in descending order
-//! Run: zig run solutions/06-data-structures-std/03_sort.zig
+//! Run: zig run exercises/06-data-structures-std/03_sort.zig
 //! Expected output:
 //!   { 9, 8, 5, 3, 2, 1 }
 

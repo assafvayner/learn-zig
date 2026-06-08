@@ -10,7 +10,7 @@ version or the exercises may not compile.
 ## Setup
 
 1. Install Zig **0.16.0**: <https://ziglang.org/download/0.16.0/> — verify with `zig version`.
-2. Read the book: <!-- PAGES_URL --> (or build it locally: `cd book && mdbook serve`).
+2. Read the book: build it locally with `cd book && mdbook serve` and open the printed URL. (Publish a hosted copy anytime with the included GitHub Pages workflow in `.github/workflows/pages.yml`.)
 3. Work the exercises in `exercises/`. Each file says how to run it and what output to expect.
 
 ## How it works
