@@ -1,0 +1,17 @@
+.{
+    .name = .repeat,
+    .version = "0.1.0",
+    .fingerprint = 0xa857b3c0ffff6f17,
+    .minimum_zig_version = "0.16.0",
+    .dependencies = .{
+        .clap = .{
+            .url = "git+https://github.com/Hejsil/zig-clap#bf56f229ed5b6c381d90e192234913c6deb3f688",
+            .hash = "clap-0.12.0-oBajB9noAQCFiI2syvjiZf6dENWUBFPWMEzdEPr99ZVx",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

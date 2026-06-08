@@ -1,0 +1,21 @@
+.{
+    .name = .quoteapi,
+    .version = "0.1.0",
+    .fingerprint = 0x10c44c47a4427ab4,
+    .minimum_zig_version = "0.16.0",
+    .dependencies = .{
+        .httpz = .{
+            .url = "git+https://github.com/karlseguin/http.zig#f39f1ed803fcf080a01a3ab9c11b3cf9e0ff9aa8",
+            .hash = "httpz-0.0.0-PNVzrLLOCAD99G3Q3N-nDSsL40Yl7bAJ0_et7PXeWgsa",
+        },
+        .clap = .{
+            .url = "git+https://github.com/Hejsil/zig-clap#bf56f229ed5b6c381d90e192234913c6deb3f688",
+            .hash = "clap-0.12.0-oBajB9noAQCFiI2syvjiZf6dENWUBFPWMEzdEPr99ZVx",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

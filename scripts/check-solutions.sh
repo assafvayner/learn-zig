@@ -10,7 +10,10 @@ echo "== zig version =="
 zig version
 
 echo "== fmt check =="
-zig fmt --check solutions exercises
+# Exclude fetched dependencies (zig-pkg) and build caches — only our own code.
+find solutions exercises -name '*.zig' \
+  -not -path '*/zig-pkg/*' -not -path '*/.zig-cache/*' -not -path '*/zig-out/*' \
+  -print0 | sort -z | xargs -0 zig fmt --check
 
 echo "== single-file solutions (chapters 0-7) =="
 while IFS= read -r -d '' f; do
@@ -34,7 +37,11 @@ echo "== project solutions (chapters 8-11) =="
 # Chapter tasks append their project here as they are implemented.
 PROJECTS=(
   "solutions/08-multifile/wordtool:run"
+  "solutions/09-packages/1-clap-cli:build"
+  "solutions/09-packages/2-raylib-demo:build"
+  "solutions/09-packages/3-httpz-api:build"
   "solutions/10-concurrency/parallel:run"
+  "solutions/11-capstone/wordfreq:run"
 )
 for entry in "${PROJECTS[@]:-}"; do
   [ -z "$entry" ] && continue
