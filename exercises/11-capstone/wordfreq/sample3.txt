@@ -1,0 +1,4 @@
+threads let a program do many things at once
+each thread owns its own work and its own data
+when the threads join the program merges the results
+parallel work is fast work when the data is partitioned

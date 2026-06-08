@@ -1,0 +1,4 @@
+zig is a fast and simple systems language
+the zig compiler is written in zig and c
+a language is only as good as its tooling
+zig keeps the language small and the tooling sharp
