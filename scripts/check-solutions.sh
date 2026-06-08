@@ -33,6 +33,8 @@ echo "== project solutions (chapters 8-11) =="
 #   build -> zig build                     (build-only, e.g. needs a display)
 # Chapter tasks append their project here as they are implemented.
 PROJECTS=(
+  "solutions/08-multifile/wordtool:run"
+  "solutions/10-concurrency/parallel:run"
 )
 for entry in "${PROJECTS[@]:-}"; do
   [ -z "$entry" ] && continue
