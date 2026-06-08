@@ -1,0 +1,12 @@
+# Zig
+.zig-cache/
+zig-out/
+
+# mdBook output
+book/book/
+
+# Dev-only design docs (never published)
+docs/superpowers/
+
+# OS
+.DS_Store
