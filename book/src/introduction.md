@@ -24,7 +24,7 @@ $ zig version
 0.16.0
 ```
 
-Get it from <https://ziglang.org/download/0.16.0/>.
+Get it from <https://ziglang.org/download/> (choose 0.16.0).
 
 ## Read the official docs alongside this
 

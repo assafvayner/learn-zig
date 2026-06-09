@@ -9,7 +9,7 @@ version or the exercises may not compile.
 
 ## Setup
 
-1. Install Zig **0.16.0**: <https://ziglang.org/download/0.16.0/> — verify with `zig version`.
+1. Install Zig **0.16.0**: get it from <https://ziglang.org/download/> (choose 0.16.0) — verify with `zig version`.
 2. Read the book: build it locally with `cd book && mdbook serve` and open the printed URL. (Publish a hosted copy anytime with the included GitHub Pages workflow in `.github/workflows/pages.yml`.)
 3. Work the exercises in `exercises/`. Each file says how to run it and what output to expect.
 4. Bookmark the official docs: [language reference](https://ziglang.org/documentation/0.16.0/) and [standard library](https://ziglang.org/documentation/0.16.0/std/) — this course links into them throughout.
