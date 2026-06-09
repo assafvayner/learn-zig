@@ -29,9 +29,11 @@ pub fn countText(alloc: std.mem.Allocator, text: []const u8) !Counts {
     var counts = Counts.init(alloc);
     errdefer counts.deinit();
 
-    // TODO: tokenize `text` (try std.mem.tokenizeAny on whitespace +
-    // punctuation) and, for each word, getOrPut into `counts`, bumping the
-    // value (start at 1 for a new key, +1 for an existing one).
+    // TODO: tokenize `text` with std.mem.tokenizeAny (taught in Ch3) over a
+    // delimiter set of whitespace AND punctuation — the tests split on `-`,
+    // `,`, `!`, `\t`, ... so include those bytes too. For each word, getOrPut
+    // into `counts`, bumping the value (1 for a new key, +1 for an existing).
+    // Docs: https://ziglang.org/documentation/0.16.0/std/#std.mem.tokenizeAny
     _ = text;
 
     return counts;

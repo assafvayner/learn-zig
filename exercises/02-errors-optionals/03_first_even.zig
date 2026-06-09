@@ -20,7 +20,8 @@ pub fn main() void {
 
     // TODO: call firstEven(has_even); if the result is non-null print "first even: {d}\n",
     //       otherwise print "first even: none\n"
-    //       Hint: use `orelse` with a block that prints "none" and returns
+    //       Hint: an `if` capture handles both cases per call without an early return —
+    //       `if (firstEven(has_even)) |v| { ...print v... } else { ...print "none"... }`
     _ = has_even;
 
     // TODO: same for no_even

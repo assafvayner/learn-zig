@@ -69,8 +69,14 @@ while (it.next()) |word| { ... }
 // Iterate fields (empty tokens between consecutive delimiters)
 var it2 = std.mem.splitScalar(u8, "a,,b", ',');
 
+// Split on ANY byte in a delimiter set (whitespace + punctuation, etc.)
+var it3 = std.mem.tokenizeAny(u8, "a, b;c", " ,;");
+
 // Equality
 std.mem.eql(u8, "zig", "zig") // true
+
+// Lexicographic order (handy for sort tie-breaks)
+std.mem.lessThan(u8, "abc", "abd") // true
 
 // Search
 std.mem.indexOfScalar(u8, s, ':') // ?usize
@@ -87,6 +93,8 @@ std.mem.reverse(u8, mutable_slice);
 // Copy bytes
 std.mem.copyForwards(u8, dst, src);
 ```
+
+These are a slice of `std.mem` — browse the [official `std.mem` docs](https://ziglang.org/documentation/0.16.0/std/#std.mem) for the rest. Two that come back in later chapters: [`tokenizeAny`](https://ziglang.org/documentation/0.16.0/std/#std.mem.tokenizeAny) (chapter 11) and [`lessThan`](https://ziglang.org/documentation/0.16.0/std/#std.mem.lessThan) (sort tie-breaks in chapters 6 and 11).
 
 ## std.ascii helpers
 

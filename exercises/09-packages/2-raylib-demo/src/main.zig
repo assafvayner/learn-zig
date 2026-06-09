@@ -30,7 +30,12 @@ pub fn main(init: std.process.Init) !void {
 
     // TODO 2: Allocate `count` Ball values (gpa.alloc(Ball, count); defer free)
     //   and initialize each with a position, a velocity, a radius, and a color
-    //   (rl.Color values like .red, .blue, .green ...). Use std.Random for variety.
+    //   (rl.Color values like .red, .blue, .green ...).
+    //   Use std.Random for variety — the Zig RNG idiom is:
+    //       var prng = std.Random.DefaultPrng.init(0xBA11_5EED);
+    //       const rand = prng.random();
+    //       // rand.float(f32) -> [0,1) ; rand.intRangeLessThan(i32, lo, hi) -> [lo,hi)
+    //   Docs: https://ziglang.org/documentation/0.16.0/std/#std.Random
 
     // TODO 3: Open the window:
     //   rl.initWindow(width, height, "bouncing balls");

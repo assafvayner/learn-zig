@@ -27,5 +27,6 @@ pub fn main() !void {
     _ = text;
 
     // TODO: collect map entries into an ArrayList(Entry), sort descending by count
-    //       then ascending by word, and print each "word: count"
+    //       then ascending by word (tie-break with std.mem.lessThan, see Ch3),
+    //       and print each "word: count"
 }

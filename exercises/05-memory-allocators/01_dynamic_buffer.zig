@@ -15,8 +15,10 @@ pub fn main() !void {
     defer _ = gpa.deinit();
     const alloc = gpa.allocator();
 
-    // TODO: allocate a []u8 of length 5, fill it with 'a'..'e',
-    //       print it with std.debug.print("{s}\n", .{buf}),
+    // TODO: allocate a []u8 of length 5, fill it with 'a'..'e'.
+    //       Note: `i` is a usize, so the byte is `'a' + @as(u8, @intCast(i))`
+    //       (a bare `'a' + i` stays usize and won't fit in a u8).
+    //       Print it with std.debug.print("{s}\n", .{buf}),
     //       and free it with defer alloc.free(buf).
     _ = alloc;
 }

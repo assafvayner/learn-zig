@@ -12,8 +12,9 @@ pub fn main() !void {
     var top: usize = 0;
 
     // TODO: iterate over tokens.
-    // If the token is one of + - * /, pop two values (b = top-1, a = top-2),
-    // compute the result, and push it.
+    // Compare each token to the operators with std.mem.eql (from Ch3), e.g.
+    // std.mem.eql(u8, tok, "+"). If it is one of + - * /, pop two values
+    // (b = top-1, a = top-2), compute the result, and push it.
     // Otherwise parse the token as i64 with std.fmt.parseInt and push it.
     // Use @divTrunc for integer division.
     _ = &stack;
