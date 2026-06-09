@@ -15,11 +15,11 @@ defer list.deinit(alloc);
 try list.append(alloc, 42);
 try list.appendSlice(alloc, &[_]u32{ 1, 2, 3 });
 
-const last: ?u32 = list.pop();   // returns ?T; null if empty
-const owned = try list.toOwnedSlice(alloc); // caller owns slice, list is empty
-defer alloc.free(owned);
+std.debug.print("{any}\n", .{list.items}); // items is []T — current contents
 
-std.debug.print("{any}\n", .{list.items}); // items is []T
+const last: ?u32 = list.pop();   // returns ?T; null if empty
+const owned = try list.toOwnedSlice(alloc); // caller now owns the slice; list is left empty
+defer alloc.free(owned);
 ```
 
 The `.empty` sentinel initializes a zero-capacity list without allocating. Compare with `std.ArrayListUnmanaged` — that's a type alias; `std.ArrayList` is the same thing.
@@ -45,7 +45,7 @@ Use `std.AutoHashMap` for integer, enum, or other non-string keys; it derives th
 
 ### Iteration order is unspecified
 
-The hash map does not preserve insertion order. If output must be deterministic, collect entries into a slice and sort:
+The hash map does not preserve insertion order. Iterate the entries with `map.iterator()`:
 
 ```zig
 var it = map.iterator();
@@ -54,7 +54,7 @@ while (it.next()) |e| {
 }
 ```
 
-`map.count()` returns the number of entries.
+Each entry exposes `key_ptr` and `value_ptr`. For deterministic output, copy the entries into a slice and sort it with `std.sort.pdq` (see the next section) — exactly what exercise 02 does. `map.count()` returns the number of entries.
 
 ## Sorting
 

@@ -72,7 +72,7 @@ Every distinct combination of comptime arguments produces a distinct type: `Stac
 
 ## Comptime blocks
 
-A block labeled with `blk:` at file scope (or inside a `comptime { }` block) is evaluated entirely at compile time. This is how you build lookup tables, precompute constants, or validate invariants without runtime cost.
+A labeled block that initializes a file-scope `const` (or one placed inside a `comptime { }` block) is evaluated entirely at compile time — it is the surrounding context, not the `blk:` label, that forces comptime evaluation. File-scope `const` initializers are themselves comptime contexts. This is how you build lookup tables, precompute constants, or validate invariants without runtime cost.
 
 ```zig
 const table: [15]u64 = blk: {

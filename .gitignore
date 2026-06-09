@@ -3,6 +3,12 @@
 zig-out/
 zig-pkg/
 
+# Compiled binaries accidentally produced in exercise dirs
+# (e.g. `zig build-exe foo.zig -femit-bin=ex01`) — only sources/text belong here.
+exercises/**/ex0*
+*.o
+*.obj
+
 # mdBook output
 book/book/
 
