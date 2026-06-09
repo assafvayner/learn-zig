@@ -2,7 +2,7 @@
 
 ## No Hidden Allocation
 
-Zig has no global heap. Every function that needs dynamic memory receives a `std.mem.Allocator` as a parameter. This makes allocation visible, testable, and swappable — you can substitute a test allocator, an arena, or a fixed buffer without changing any logic.
+Zig has [no hidden allocation](https://ziglang.org/documentation/0.16.0/#Memory) and no global heap. Every function that needs dynamic memory receives a [`std.mem.Allocator`](https://ziglang.org/documentation/0.16.0/std/#std.mem.Allocator) as a parameter. This makes allocation visible, testable, and swappable — you can substitute a test allocator, an arena, or a fixed buffer without changing any logic.
 
 ## The Allocator Interface
 
@@ -32,7 +32,7 @@ node.* = .{ ... };
 
 ### `std.heap.DebugAllocator`
 
-The default choice for development. Detects leaks, double-frees, and use-after-free. `deinit()` returns `.leak` or `.ok` and prints a report.
+The default choice for development. [`std.heap.DebugAllocator`](https://ziglang.org/documentation/0.16.0/std/#std.heap.DebugAllocator) detects leaks, double-frees, and use-after-free. `deinit()` returns `.leak` or `.ok` and prints a report.
 
 ```zig
 var gpa: std.heap.DebugAllocator(.{}) = .init;
@@ -44,7 +44,7 @@ Use it everywhere during development. Switch to `page_allocator` or a release-mo
 
 ### `std.heap.ArenaAllocator`
 
-Allocates from a backing allocator; `deinit()` frees everything at once. There are no individual frees — call `alloc.create` or `alloc.alloc` freely, then tear down in one shot. Ideal for request-scoped or parse-scoped work.
+[`std.heap.ArenaAllocator`](https://ziglang.org/documentation/0.16.0/std/#std.heap.ArenaAllocator) allocates from a backing allocator; `deinit()` frees everything at once. There are no individual frees — call `alloc.create` or `alloc.alloc` freely, then tear down in one shot. Ideal for request-scoped or parse-scoped work.
 
 ```zig
 var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
@@ -54,7 +54,7 @@ const alloc = arena.allocator();
 
 ### `std.heap.FixedBufferAllocator`
 
-Bump-allocates into a caller-supplied byte array. No OS calls, no fragmentation. Fails with `OutOfMemory` when the buffer is exhausted. Good for stack-local scratch space or embedded targets.
+[`std.heap.FixedBufferAllocator`](https://ziglang.org/documentation/0.16.0/std/#std.heap.FixedBufferAllocator) bump-allocates into a caller-supplied byte array. No OS calls, no fragmentation. Fails with `OutOfMemory` when the buffer is exhausted. Good for stack-local scratch space or embedded targets.
 
 ```zig
 var buf: [4096]u8 = undefined;
@@ -64,11 +64,11 @@ const alloc = fba.allocator();
 
 ### `std.heap.page_allocator`
 
-Calls the OS directly (`mmap`/`VirtualAlloc`). No bookkeeping overhead, but granularity is a full page (4 KiB+). Use as the backing allocator for arenas, or for large one-shot allocations.
+[`std.heap.page_allocator`](https://ziglang.org/documentation/0.16.0/std/#std.heap.page_allocator) calls the OS directly (`mmap`/`VirtualAlloc`). No bookkeeping overhead, but granularity is a full page (4 KiB+). Use as the backing allocator for arenas, or for large one-shot allocations.
 
 ## `std.testing.allocator`
 
-In tests, use `std.testing.allocator` instead of a `DebugAllocator`. It runs the same leak detection and **fails the test** automatically if anything is not freed — no manual check required.
+In tests, use [`std.testing.allocator`](https://ziglang.org/documentation/0.16.0/std/#std.testing.allocator) instead of a `DebugAllocator`. It runs the same leak detection and **fails the test** automatically if anything is not freed — no manual check required.
 
 ```zig
 test "no leaks" {

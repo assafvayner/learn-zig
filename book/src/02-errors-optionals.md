@@ -1,6 +1,6 @@
 # Errors & Optionals
 
-Zig has two distinct mechanisms for "something went wrong or missing": **error unions** for failure, and **optionals** for absence. They are different types and serve different purposes.
+Zig has two distinct mechanisms for "something went wrong or missing": **[error unions](https://ziglang.org/documentation/0.16.0/#Error-Union-Type)** for failure, and **optionals** for absence. They are different types and serve different purposes.
 
 ---
 
@@ -19,13 +19,13 @@ fn divide(a: i32, b: i32) MathError!i32 {
 
 ### Handling errors
 
-**`try`** — propagates on error, unwraps on success. Requires the calling function to return `!T`.
+**[`try`](https://ziglang.org/documentation/0.16.0/#try)** — propagates on error, unwraps on success. Requires the calling function to return `!T`.
 
 ```zig
 const v = try divide(10, 2); // v is i32; propagates DivByZero upward
 ```
 
-**`catch`** — handle inline. The payload form `catch |e| { ... }` names the error.
+**[`catch`](https://ziglang.org/documentation/0.16.0/#catch)** — handle inline. The payload form `catch |e| { ... }` names the error.
 
 ```zig
 const v = divide(10, 0) catch 0;           // default value
@@ -45,7 +45,7 @@ if (divide(10, 0)) |result| {
 }
 ```
 
-**`errdefer`** — runs a cleanup expression only when the enclosing function returns an error, not on a normal return.
+**[`errdefer`](https://ziglang.org/documentation/0.16.0/#errdefer)** — runs a cleanup expression only when the enclosing function returns an error, not on a normal return.
 
 ```zig
 fn openAndProcess() !void {
@@ -63,7 +63,7 @@ fn openAndProcess() !void {
 
 ## Optionals
 
-`?T` holds either a value of type `T` or `null`. No error information, just presence vs. absence.
+[`?T`](https://ziglang.org/documentation/0.16.0/#Optionals) holds either a value of type `T` or `null`. No error information, just presence vs. absence.
 
 ```zig
 fn firstEven(items: []const u32) ?u32 {

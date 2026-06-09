@@ -1,6 +1,6 @@
 # Multi-file Programs & the Build System
 
-Up to now every example was a single file run with `zig run`. Real programs span multiple files and are driven by `build.zig` — a Zig program that describes how to compile, run, and test your code. This chapter builds a small project called `wordtool` to introduce both.
+Up to now every example was a single file run with `zig run`. Real programs span multiple files and are driven by `build.zig` — a Zig program that describes how to compile, run, and test your code. This chapter builds a small project called `wordtool` to introduce both, using the [build system](https://ziglang.org/documentation/0.16.0/#Zig-Build-System).
 
 The project layout:
 
@@ -16,7 +16,7 @@ wordtool/
 
 ## @import and pub visibility
 
-A file is a struct. You bring one file into another with `@import`, passing the path relative to the importing file:
+[A file is a struct](https://ziglang.org/documentation/0.16.0/#Source-File-Structs). You bring one file into another with [`@import`](https://ziglang.org/documentation/0.16.0/#import), passing the path relative to the importing file:
 
 ```zig
 const std = @import("std");
@@ -81,7 +81,7 @@ Tests live in the same file as the code they cover. Keeping them there means a t
 
 ## Anatomy of build.zig
 
-`build.zig` defines a single `pub fn build(b: *std.Build) void`. The `b` builder is your handle for declaring artifacts and steps.
+`build.zig` defines a single `pub fn build(b: *std.Build) void`. The `b` builder, typed as [`std.Build`](https://ziglang.org/documentation/0.16.0/std/#std.Build), is your handle for declaring artifacts and steps.
 
 ```zig
 const std = @import("std");
@@ -125,7 +125,7 @@ Piece by piece:
 - **`addExecutable`** declares a binary. In 0.16 the source and build settings live in a *module*: `.root_module = b.createModule(.{ .root_source_file = b.path("src/main.zig"), .target = ..., .optimize = ... })`. (`b.path` resolves a path relative to the project root.) Note `main.zig` imports `textstats.zig` directly — no separate module wiring is needed for files within one package.
 - **`installArtifact(exe)`** adds the exe to the default `install` step, so a bare `zig build` writes it to `zig-out/bin/`.
 - **The run step**: `addRunArtifact(exe)` creates a command that runs the built binary; depending on the install step ensures it is built first; `b.args` forwards anything after `--`; and `b.step("run", ...)` names it so `zig build run` works.
-- **The test step**: `addTest` compiles a file's `test` blocks into a test runner — here against `src/textstats.zig`. `addRunArtifact` runs it, and `b.step("test", ...)` exposes `zig build test`.
+- **The test step**: `addTest` compiles a file's [`test`](https://ziglang.org/documentation/0.16.0/#Test-Declarations) blocks into a test runner — here against `src/textstats.zig`. `addRunArtifact` runs it, and `b.step("test", ...)` exposes `zig build test`.
 
 ---
 

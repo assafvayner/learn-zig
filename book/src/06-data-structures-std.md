@@ -2,7 +2,7 @@
 
 ## ArrayList
 
-`std.ArrayList(T)` is **unmanaged**: it holds no allocator internally. Every method that may allocate takes an `Allocator` argument. This keeps the struct small and makes allocator choice explicit at each call site.
+[`std.ArrayList`](https://ziglang.org/documentation/0.16.0/std/#std.ArrayList)`(T)` is **unmanaged**: it holds no allocator internally. Every method that may allocate takes an `Allocator` argument. This keeps the struct small and makes allocator choice explicit at each call site.
 
 ```zig
 var gpa: std.heap.DebugAllocator(.{}) = .init;
@@ -26,7 +26,7 @@ The `.empty` sentinel initializes a zero-capacity list without allocating. Compa
 
 ## HashMap
 
-`std.StringHashMap(V)` and `std.AutoHashMap(K, V)` are **managed**: they store an allocator and you call `init(alloc)` once.
+[`std.StringHashMap`](https://ziglang.org/documentation/0.16.0/std/#std.StringHashMap)`(V)` and `std.AutoHashMap(K, V)` are **managed**: they store an allocator and you call `init(alloc)` once.
 
 ```zig
 var map = std.StringHashMap(u32).init(alloc);
@@ -41,7 +41,7 @@ if (!gop.found_existing) gop.value_ptr.* = 0;
 gop.value_ptr.* += 1;
 ```
 
-Use `std.AutoHashMap` for integer, enum, or other non-string keys; it derives the hash automatically.
+Use [`std.AutoHashMap`](https://ziglang.org/documentation/0.16.0/std/#std.AutoHashMap) for integer, enum, or other non-string keys; it derives the hash automatically.
 
 ### Iteration order is unspecified
 
@@ -54,7 +54,7 @@ while (it.next()) |e| {
 }
 ```
 
-Each entry exposes `key_ptr` and `value_ptr`. For deterministic output, copy the entries into a slice and sort it with `std.sort.pdq` (see the next section) — exactly what exercise 02 does. `map.count()` returns the number of entries.
+Each entry exposes `key_ptr` and `value_ptr`. For deterministic output, copy the entries into a slice and sort it with [`std.sort.pdq`](https://ziglang.org/documentation/0.16.0/std/#std.sort.pdq) (see the next section) — exactly what exercise 02 does. `map.count()` returns the number of entries.
 
 ## Sorting
 
@@ -96,7 +96,7 @@ while (it.next()) |word| {
 
 ## JSON
 
-`std.json.parseFromSlice` parses JSON bytes into a Zig struct. The returned `Parsed(T)` owns any heap allocations (strings, nested structs); call `.deinit()` to free them.
+[`std.json.parseFromSlice`](https://ziglang.org/documentation/0.16.0/std/#std.json.parseFromSlice) parses JSON bytes into a Zig struct. The returned `Parsed(T)` owns any heap allocations (strings, nested structs); call `.deinit()` to free them.
 
 ```zig
 const Info = struct { name: []const u8, year: u32 };

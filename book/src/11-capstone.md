@@ -49,7 +49,7 @@ buffer. This is the chapter-5 ownership lesson showing up in a real program.
 ### Reading files in 0.16
 
 File I/O goes through the new I/O interface. The whole-file read is
-`std.Io.Dir.cwd().readFileAlloc(io, path, allocator, .limited(max))`, where `io`
+[`readFileAlloc`](https://ziglang.org/documentation/0.16.0/std/#std.Io.Dir) via `std.Io.Dir.cwd().readFileAlloc(io, path, allocator, .limited(max))`, where `io`
 comes from `init.io` in `main`. The returned buffer is owned by the caller.
 
 ## Stretch goals
@@ -62,14 +62,14 @@ comes from `init.io` in `main`. The returned buffer is owned by the caller.
 
 ## Where to go next
 
-- **C interop** — `@cImport` pulls C headers straight into Zig; the build system
+- **C interop** — [`@cImport`](https://ziglang.org/documentation/0.16.0/#Import-from-C-Header-File) pulls C headers straight into Zig; the build system
   can `translate-c` a header or compile C sources alongside your Zig code, so
   reusing an existing C library is a few lines of `build.zig`.
 - **The new concurrency model** — `std.Io` lets the *caller* pick the backend
-  (threads, an event loop, `io_uring`), and `std.Io.Group` gives structured
+  (threads, an event loop, `io_uring`), and [`std.Io.Group`](https://ziglang.org/documentation/0.16.0/std/#std.Io.Group) gives structured
   concurrency: tasks spawned into a group are guaranteed to finish (or cancel)
   by the time you `await` it. That is where `wordfreq`'s threads-and-join shape
   is heading.
-- **Cross-compilation** — `zig build -Dtarget=aarch64-linux-musl` (and friends)
+- **[Cross-compilation](https://ziglang.org/documentation/0.16.0/#Targets)** — `zig build -Dtarget=aarch64-linux-musl` (and friends)
   produces a binary for another OS/arch with no extra toolchain; Zig ships the
   libc headers and is itself a C/C++ cross-compiler.

@@ -26,6 +26,13 @@ $ zig version
 
 Get it from <https://ziglang.org/download/0.16.0/>.
 
+## Read the official docs alongside this
+
+This course links into the official Zig documentation throughout — follow those links and get comfortable navigating them, because they are the source of truth as the language moves. Two hubs, both pinned to 0.16.0:
+
+- The **[language reference](https://ziglang.org/documentation/0.16.0/)** — syntax and semantics (`comptime`, error unions, slices, the build system, …).
+- The **[standard library docs](https://ziglang.org/documentation/0.16.0/std/)** — the searchable `std` API browser.
+
 ## How to use this course
 
 Each chapter is a short read followed by exercises you actually run.

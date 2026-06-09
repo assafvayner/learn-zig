@@ -1,6 +1,6 @@
 # Concurrency
 
-This chapter teaches *a little* concurrency: the primitives that are small, safe, and present in Zig 0.16.0. You spawn OS threads with `std.Thread`, avoid data races by **partitioning** the data so no two threads touch the same memory, and use `std.atomic.Value` when you genuinely need one shared counter.
+This chapter teaches *a little* concurrency: the primitives that are small, safe, and present in Zig 0.16.0. You spawn OS threads with [`std.Thread`](https://ziglang.org/documentation/0.16.0/std/#std.Thread), avoid data races by **partitioning** the data so no two threads touch the same memory, and use [`std.atomic.Value`](https://ziglang.org/documentation/0.16.0/std/#std.atomic.Value) when you genuinely need one shared counter.
 
 > **0.16 changed the concurrency story.** The "I/O as an interface" rework **removed** `std.Thread.Mutex`, `std.Thread.Pool`, and `std.Thread.WaitGroup`. They will not compile. Their replacements live behind the new `std.Io` interface (`std.Io.Mutex`, `std.Io.Group`, `std.Io.async`). This chapter sticks to raw threads + atomics, which still exist and need no `Io` object. See the closing section for where things are heading.
 
@@ -33,7 +33,7 @@ Spawning all of them before joining any is what makes the work overlap. If you j
 
 ## Data races, and avoiding them by partitioning
 
-A **data race** is two threads accessing the same memory concurrently with at least one write, and no synchronization. The result is undefined — torn values, lost updates, or worse. The compiler will not catch it for you.
+A [**data race**](https://ziglang.org/documentation/0.16.0/#Atomics) is two threads accessing the same memory concurrently with at least one write, and no synchronization. The result is undefined — torn values, lost updates, or worse. The compiler will not catch it for you.
 
 The simplest fix is to never share mutable memory in the first place. Give each thread its **own** output slot, or its **own disjoint region** of an output slice, and combine the results only after every thread has joined. No locks, no atomics, no races.
 
@@ -76,7 +76,7 @@ The `.seq_cst` argument is the **memory ordering** — sequential consistency, t
 
 ## Where Zig is heading: `std.Io` structured concurrency
 
-The future of concurrency in Zig is the `std.Io` interface. You pass an `Io` to your code, and the *caller* chooses whether it is backed by threads, a single-threaded event loop, or `io_uring`. A `std.Io.Group` gives **structured concurrency**: tasks spawned into the group are guaranteed to finish (or be canceled) by the time you `await` it.
+The future of concurrency in Zig is the `std.Io` interface. You pass an `Io` to your code, and the *caller* chooses whether it is backed by threads, a single-threaded event loop, or `io_uring`. A [`std.Io.Group`](https://ziglang.org/documentation/0.16.0/std/#std.Io.Group) gives **structured concurrency**: tasks spawned into the group are guaranteed to finish (or be canceled) by the time you `await` it.
 
 ```zig
 // Taste only — needs a real `Io` instance to run.

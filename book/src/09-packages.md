@@ -1,6 +1,6 @@
 # Packages & Open-Source Libraries
 
-Chapter 8 split a program across files inside one package. Real programs also pull in *other people's* packages. Zig ships a package manager built into the compiler — no separate tool, no central registry. A dependency is a URL plus a content hash, recorded in `build.zig.zon` and fetched on demand.
+Chapter 8 split a program across files inside one package. Real programs also pull in *other people's* packages. Zig ships a [package manager](https://ziglang.org/documentation/0.16.0/#Zig-Build-System) built into the compiler — no separate tool, no central registry. A dependency is a URL plus a content hash, recorded in `build.zig.zon` and fetched on demand.
 
 This chapter is three small projects, each consuming a real third-party library:
 
@@ -134,7 +134,7 @@ pub fn main(init: std.process.Init) !void {
 
 Three things are new in the 0.16 entry point and worth pinning down:
 
-- **`pub fn main(init: std.process.Init)`.** The runtime hands you an `init` struct instead of you fishing for argv and stdout yourself. `init.minimal.args` is the raw argument iterator clap parses, `init.gpa` is a process-lifetime allocator, and `init.io` is the `std.Io` instance the new standard library threads through every I/O call. That's why diagnostics print via `diag.reportToFile(init.io, .stderr(), err)`.
+- **`pub fn main(init: std.process.Init)`.** The runtime hands you an [`std.process.Init`](https://ziglang.org/documentation/0.16.0/std/#std.process.Init) struct instead of you fishing for argv and stdout yourself. `init.minimal.args` is the raw argument iterator clap parses, `init.gpa` is a process-lifetime allocator, and `init.io` is the `std.Io` instance the new standard library threads through every I/O call. That's why diagnostics print via `diag.reportToFile(init.io, .stderr(), err)`.
 - **Flags vs. counts.** A boolean flag like `--upper` is a *count* (`res.args.upper != 0` means it was passed); `--count <usize>` is an optional value (`res.args.count orelse 1`).
 - **One positional is optional, not a slice.** A single `<str>` makes `res.positionals[0]` a `?[]const u8` — hence `orelse "hello"`. Declare `<str>...` instead and you'd get a slice to iterate. Mixing these up is the most common first mistake.
 

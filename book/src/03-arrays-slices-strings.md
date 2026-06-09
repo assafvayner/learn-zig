@@ -2,18 +2,18 @@
 
 ## Arrays
 
-An array `[N]T` is a value type with a compile-time-fixed length. The length is part of the type: `[3]u8` and `[4]u8` are distinct types.
+An [array](https://ziglang.org/documentation/0.16.0/#Arrays) `[N]T` is a value type with a compile-time-fixed length. The length is part of the type: `[3]u8` and `[4]u8` are distinct types.
 
 ```zig
 const digits = [5]u8{ 1, 2, 3, 4, 5 };
 const inferred = [_]u8{ 1, 2, 3 }; // length inferred as 3
 ```
 
-Arrays live on the stack (or in static memory for constants). Passing an array to a function copies it unless you pass a pointer or slice.
+Arrays live on the stack (or in static memory for constants). Passing an array to a function copies it unless you pass a [pointer](https://ziglang.org/documentation/0.16.0/#Pointers) or slice.
 
 ## Slices
 
-A slice `[]T` is a fat pointer: a runtime `ptr` + `len`. It does not own memory; it is a view into an array, another slice, or heap memory.
+A [slice](https://ziglang.org/documentation/0.16.0/#Slices) `[]T` is a fat pointer: a runtime `ptr` + `len`. It does not own memory; it is a view into an array, another slice, or heap memory.
 
 ```zig
 var arr = [_]u32{ 10, 20, 30, 40 };
@@ -31,7 +31,7 @@ var buf: [64]u8 = undefined;
 
 ## Strings
 
-There is no dedicated string type. A string literal `"zig"` has type `*const [3:0]u8` — a pointer to a null-terminated array — and coerces freely to `[]const u8`. All string-handling functions work on `[]const u8`.
+There is no dedicated string type. A [string literal](https://ziglang.org/documentation/0.16.0/#String-Literals-and-Unicode-Code-Point-Literals) `"zig"` has type `*const [3:0]u8` — a pointer to a null-terminated array — and coerces freely to `[]const u8`. All string-handling functions work on `[]const u8`.
 
 ```zig
 const greeting: []const u8 = "hello";
@@ -118,5 +118,5 @@ std.mem.copyForwards(u8, &buf2, "zig");
 
 - **01_reverse** — reverse `"zig"` byte-by-byte and print `giz`.
 - **02_word_count** — count words in a sentence with `tokenizeScalar`.
-- **03_palindrome** — case-insensitive palindrome check using `std.ascii.toLower`.
+- **03_palindrome** — case-insensitive palindrome check using [`std.ascii`](https://ziglang.org/documentation/0.16.0/std/#std.ascii)`.toLower`.
 - **04_caesar** — Caesar cipher shift by 3, wrapping within letter case.

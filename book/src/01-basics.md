@@ -2,7 +2,7 @@
 
 ## Sized integers and overflow traps
 
-Every integer type carries its width and signedness in the name: `u8`, `i32`, `u64`, `usize`, `isize`. There is no implicit promotion. Integer overflow **panics at runtime** in debug builds — unlike C's undefined behavior or Rust's `wrapping_add`. When you genuinely want wrapping semantics, use the dedicated operators: `+%`, `-%`, `*%`. Casting uses `@intCast(x)` (traps if the value doesn't fit) or `@as(T, x)` (compile-time-checked coercion).
+Every [integer type](https://ziglang.org/documentation/0.16.0/#Integers) carries its width and signedness in the name: `u8`, `i32`, `u64`, `usize`, `isize`. There is no implicit promotion. Integer overflow [**panics at runtime**](https://ziglang.org/documentation/0.16.0/#Integer-Overflow) in debug builds — unlike C's undefined behavior or Rust's `wrapping_add`. When you genuinely want [wrapping semantics](https://ziglang.org/documentation/0.16.0/#Wrapping-Operations), use the dedicated operators: `+%`, `-%`, `*%`. Casting uses `@intCast(x)` (traps if the value doesn't fit) or `@as(T, x)` (compile-time-checked coercion).
 
 ```zig
 var x: u8 = 255;
@@ -69,7 +69,7 @@ for (words, 0..) |w, i| {
 
 ## `switch`
 
-`switch` is exhaustive — the compiler rejects unhandled cases. Use `else` to cover a default. Ranges use `...` (three dots, inclusive on both ends). Multiple values share a branch with commas. `switch` is an expression.
+[`switch`](https://ziglang.org/documentation/0.16.0/#switch) is exhaustive — the compiler rejects unhandled cases. Use `else` to cover a default. Ranges use `...` (three dots, inclusive on both ends). Multiple values share a branch with commas. `switch` is an expression.
 
 ```zig
 const label = switch (score) {
@@ -111,7 +111,7 @@ outer: for (0..5) |i| {
 
 ## `defer`
 
-`defer` schedules a statement to run when the enclosing scope exits, regardless of how (normal return, early return, error). Multiple `defer`s in the same scope execute in **LIFO** order — last registered, first run.
+[`defer`](https://ziglang.org/documentation/0.16.0/#defer) schedules a statement to run when the enclosing scope exits, regardless of how (normal return, early return, error). Multiple `defer`s in the same scope execute in **LIFO** order — last registered, first run.
 
 ```zig
 {

@@ -1,6 +1,6 @@
 # Comptime & Generics
 
-Zig has no separate generics syntax. Generics are just functions and values evaluated at compile time. The keyword `comptime` marks a parameter, variable, or block as "must be known at compile time." Types are first-class values at comptime — you pass `i32` the same way you pass `42`.
+Zig has no separate generics syntax. Generics are just functions and values evaluated at compile time. The keyword [`comptime`](https://ziglang.org/documentation/0.16.0/#comptime) marks a parameter, variable, or block as "must be known at compile time." Types are first-class values at comptime — you pass `i32` the same way you pass `42`.
 
 ---
 
@@ -23,7 +23,7 @@ const y = maxOf(f64, 2.5, 1.5); // y == 2.5
 
 ## Types as values
 
-At comptime, types are ordinary values. You can store them in constants, pass them to functions, and return them. The intrinsics `@TypeOf(expr)`, `@typeInfo(T)`, and `@This()` operate on them.
+At comptime, types are ordinary values. You can store them in constants, pass them to functions, and return them. The intrinsics `@TypeOf(expr)`, [`@typeInfo`](https://ziglang.org/documentation/0.16.0/#typeInfo)`(T)`, and [`@This()`](https://ziglang.org/documentation/0.16.0/#This) operate on them.
 
 ```zig
 const T = i32;
@@ -36,7 +36,7 @@ const U = @TypeOf(@as(T, 0)); // U == i32
 
 ## Generic containers: fn returns type
 
-The canonical Zig idiom for a generic container is a function that takes comptime parameters and returns an anonymous `struct` type. The returned type is then used as a normal type.
+The canonical Zig idiom for a [generic container](https://ziglang.org/documentation/0.16.0/#Generic-Data-Structures) is a function that takes comptime parameters and returns an anonymous `struct` type. The returned type is then used as a normal type.
 
 ```zig
 fn Stack(comptime T: type, comptime cap: usize) type {
@@ -89,7 +89,7 @@ const table: [15]u64 = blk: {
 
 `table` is embedded in the binary as a constant. There is no runtime computation.
 
-Inside a comptime context you can use `@compileError("msg")` to emit a compile-time diagnostic — useful for enforcing constraints on type parameters.
+Inside a comptime context you can use [`@compileError`](https://ziglang.org/documentation/0.16.0/#compileError)`("msg")` to emit a compile-time diagnostic — useful for enforcing constraints on type parameters.
 
 ```zig
 fn onlyInts(comptime T: type) void {
@@ -103,7 +103,7 @@ fn onlyInts(comptime T: type) void {
 
 ## inline for
 
-`inline for` unrolls the loop at compile time. Each iteration is a separate copy in the compiled output, with the loop variable known at comptime. Use it when iterating over a comptime-known range or tuple.
+[`inline for`](https://ziglang.org/documentation/0.16.0/#inline-for) unrolls the loop at compile time. Each iteration is a separate copy in the compiled output, with the loop variable known at comptime. Use it when iterating over a comptime-known range or tuple.
 
 ```zig
 inline for (0..4) |i| {

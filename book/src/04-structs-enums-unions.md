@@ -2,7 +2,7 @@
 
 ## Structs
 
-A struct is a named, ordered collection of fields. It is a value type: assigning or passing a struct copies all its fields.
+A [struct](https://ziglang.org/documentation/0.16.0/#struct) is a named, ordered collection of fields. It is a value type: assigning or passing a struct copies all its fields.
 
 ```zig
 const Vec2 = struct {
@@ -49,11 +49,11 @@ const point = .{ .x = 1, .y = 2 }; // anonymous struct
 const triple = .{ 10, "hi", true }; // tuple — fields accessed as triple[0], triple[1], …
 ```
 
-Tuples are anonymous structs with no field names; fields are numbered starting at 0.
+[Tuples](https://ziglang.org/documentation/0.16.0/#Tuples) are anonymous structs with no field names; fields are numbered starting at 0.
 
 ## Enums
 
-An enum defines a set of named integer values. By default the backing integer is the smallest `u`-type that fits.
+An [enum](https://ziglang.org/documentation/0.16.0/#enum) defines a set of named integer values. By default the backing integer is the smallest `u`-type that fits.
 
 ```zig
 const Direction = enum { north, south, east, west };
@@ -67,7 +67,7 @@ Enums can have methods, just like structs. Use `@tagName(value)` to get the vari
 
 ## Tagged Unions
 
-A plain `union` stores one of several types in a shared memory region but does not track which variant is active. A **tagged union** (`union(enum)`) adds a hidden discriminant field so the active variant is always known and safe to read.
+A plain `union` stores one of several types in a shared memory region but does not track which variant is active. A **[tagged union](https://ziglang.org/documentation/0.16.0/#Tagged-union)** (`union(enum)`) adds a hidden discriminant field so the active variant is always known and safe to read.
 
 ```zig
 const Shape = union(enum) {

@@ -34,11 +34,11 @@ pub fn main() void {
 
 Format specifiers: `{s}` string, `{d}` integer, `{x}`/`{X}` hex, `{c}` byte-as-char, `{any}` anything, `{?d}` optional int, `{d:.2}` float precision, `{}` default.
 
-Use `std.debug.print` for all exercises unless told otherwise. It writes to **stderr**, so it won't interfere with programs that produce meaningful stdout.
+Use [`std.debug.print`](https://ziglang.org/documentation/0.16.0/std/#std.debug.print) for all exercises unless told otherwise. It writes to **stderr**, so it won't interfere with programs that produce meaningful stdout.
 
 ### Buffered stdout writer — real stdout, needs setup + flush
 
-When a program's output *is* the point (pipelines, files), use the buffered writer. It requires the `init` parameter:
+When a program's output *is* the point (pipelines, files), use the [buffered writer](https://ziglang.org/documentation/0.16.0/std/#std.Io.File.Writer). It requires the `init` parameter:
 
 ```zig
 const std = @import("std");
