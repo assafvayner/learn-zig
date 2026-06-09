@@ -52,7 +52,9 @@ fn Stack(comptime T: type, comptime cap: usize) type {
         }
 
         fn pop(self: *Self) ?T {
-            if (self.len == 0) return null;
+            if (self.len == 0) {
+                return null;
+            }
             self.len -= 1;
             return self.items[self.len];
         }
@@ -94,7 +96,9 @@ Inside a comptime context you can use [`@compileError`](https://ziglang.org/docu
 ```zig
 fn onlyInts(comptime T: type) void {
     comptime {
-        if (@typeInfo(T) != .int) @compileError("T must be an integer type");
+        if (@typeInfo(T) != .int) {
+            @compileError("T must be an integer type");
+        }
     }
 }
 ```

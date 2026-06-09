@@ -12,7 +12,9 @@ An error union `E!T` holds either a value of type `T` or an error from error set
 const MathError = error{ DivByZero, Overflow };
 
 fn divide(a: i32, b: i32) MathError!i32 {
-    if (b == 0) return error.DivByZero;
+    if (b == 0) {
+        return error.DivByZero;
+    }
     return @divTrunc(a, b);
 }
 ```
@@ -68,7 +70,9 @@ fn openAndProcess() !void {
 ```zig
 fn firstEven(items: []const u32) ?u32 {
     for (items) |v| {
-        if (v % 2 == 0) return v;
+        if (v % 2 == 0) {
+            return v;
+        }
     }
     return null;
 }

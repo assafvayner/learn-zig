@@ -37,7 +37,9 @@ const v: ?u32 = map.get("hits"); // returns optional
 
 // Upsert pattern — one lookup instead of get + put:
 const gop = try map.getOrPut("hits");
-if (!gop.found_existing) gop.value_ptr.* = 0;
+if (!gop.found_existing) {
+    gop.value_ptr.* = 0;
+}
 gop.value_ptr.* += 1;
 ```
 

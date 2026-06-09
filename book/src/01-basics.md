@@ -21,7 +21,7 @@ count += 1;
 
 ## `if`
 
-No parentheses around the condition. There is no implicit boolean coercion — the condition must be `bool`.
+The condition goes in parentheses. There is no implicit boolean coercion — the condition must be `bool`.
 
 ```zig
 if (x > 0) {
@@ -98,13 +98,17 @@ Any loop or block can carry a label. `break :label` exits the labeled construct;
 ```zig
 const result = blk: {
     const a = expensive();
-    if (a > 10) break :blk a * 2;
+    if (a > 10) {
+        break :blk a * 2;
+    }
     break :blk a;
 };
 
 outer: for (0..5) |i| {
     for (0..5) |j| {
-        if (i + j == 6) break :outer;
+        if (i + j == 6) {
+            break :outer;
+        }
     }
 }
 ```

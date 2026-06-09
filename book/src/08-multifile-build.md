@@ -48,7 +48,9 @@ const std = @import("std");
 pub fn wordCount(s: []const u8) usize {
     var it = std.mem.tokenizeScalar(u8, s, ' ');
     var n: usize = 0;
-    while (it.next()) |_| n += 1;
+    while (it.next()) |_| {
+        n += 1;
+    }
     return n;
 }
 
@@ -102,7 +104,9 @@ pub fn build(b: *std.Build) void {
 
     const run_cmd = b.addRunArtifact(exe);
     run_cmd.step.dependOn(b.getInstallStep());
-    if (b.args) |args| run_cmd.addArgs(args);
+    if (b.args) |args| {
+        run_cmd.addArgs(args);
+    }
     const run_step = b.step("run", "Run wordtool");
     run_step.dependOn(&run_cmd.step);
 

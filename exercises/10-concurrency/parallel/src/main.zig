@@ -7,7 +7,9 @@ const parallel = @import("parallel.zig");
 
 pub fn main() void {
     var data: [1000]u64 = undefined;
-    for (&data, 0..) |*v, i| v.* = @intCast(i);
+    for (&data, 0..) |*v, i| {
+        v.* = @intCast(i);
+    }
 
     const sum = parallel.parallelSum(&data);
     std.debug.print("parallel sum 0..999 = {d}\n", .{sum});

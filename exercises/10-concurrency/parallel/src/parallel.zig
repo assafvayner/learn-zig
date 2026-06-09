@@ -43,13 +43,17 @@ pub fn parallelMap(in: []const u64, out: []u64) void {
 
 fn serialSum(data: []const u64) u64 {
     var total: u64 = 0;
-    for (data) |v| total += v;
+    for (data) |v| {
+        total += v;
+    }
     return total;
 }
 
 test "parallelSum equals the serial sum of 0..=999" {
     var data: [1000]u64 = undefined;
-    for (&data, 0..) |*v, i| v.* = @intCast(i);
+    for (&data, 0..) |*v, i| {
+        v.* = @intCast(i);
+    }
 
     const got = parallelSum(&data);
     try std.testing.expectEqual(@as(u64, 499500), got);
@@ -62,10 +66,14 @@ test "atomicCounter: 8 threads x 1000 increments == 8000" {
 
 test "parallelMap squares each element into a disjoint output slot" {
     var in: [1000]u64 = undefined;
-    for (&in, 0..) |*v, i| v.* = @intCast(i);
+    for (&in, 0..) |*v, i| {
+        v.* = @intCast(i);
+    }
     var out: [1000]u64 = undefined;
 
     parallelMap(&in, &out);
 
-    for (out, 0..) |o, i| try std.testing.expectEqual(@as(u64, @intCast(i * i)), o);
+    for (out, 0..) |o, i| {
+        try std.testing.expectEqual(@as(u64, @intCast(i * i)), o);
+    }
 }

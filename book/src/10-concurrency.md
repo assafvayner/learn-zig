@@ -23,8 +23,12 @@ For a fixed number of workers, store the handles in an array — spawn in one lo
 
 ```zig
 var threads: [4]std.Thread = undefined;
-for (&threads, 0..) |*t, i| t.* = try std.Thread.spawn(.{}, worker, .{i});
-for (threads) |t| t.join();
+for (&threads, 0..) |*t, i| {
+    t.* = try std.Thread.spawn(.{}, worker, .{i});
+}
+for (threads) |t| {
+    t.join();
+}
 ```
 
 Spawning all of them before joining any is what makes the work overlap. If you joined inside the first loop you would just run them one at a time.
@@ -40,7 +44,9 @@ The simplest fix is to never share mutable memory in the first place. Give each 
 ```zig
 fn sumChunk(chunk: []const u64, out: *u64) void {
     var acc: u64 = 0;
-    for (chunk) |v| acc += v;
+    for (chunk) |v| {
+        acc += v;
+    }
     out.* = acc; // each thread owns a different `out`
 }
 
@@ -48,7 +54,9 @@ var partials: [4]u64 = .{0} ** 4;
 // thread i reads data[start..end] and writes only partials[i]
 // ... spawn, then join ...
 var total: u64 = 0;
-for (partials) |p| total += p; // combine after the join barrier
+for (partials) |p| {
+    total += p; // combine after the join barrier
+}
 ```
 
 Because thread `i` writes only `partials[i]`, and the slices `data[start..end]` never overlap, there is no shared write target. The `join` calls are the only synchronization needed: once they return, all writes are visible to the main thread. The same pattern works for an output slice — partition the index range and let each thread own `[start, end)`.
@@ -64,7 +72,9 @@ var counter = std.atomic.Value(u64).init(0);
 
 fn bump(c: *std.atomic.Value(u64)) void {
     var i: usize = 0;
-    while (i < 1000) : (i += 1) _ = c.fetchAdd(1, .seq_cst);
+    while (i < 1000) : (i += 1) {
+        _ = c.fetchAdd(1, .seq_cst);
+    }
 }
 // 8 threads each call bump -> final value is exactly 8000
 const final = counter.load(.seq_cst);
