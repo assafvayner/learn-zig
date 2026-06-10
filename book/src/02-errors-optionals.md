@@ -37,6 +37,12 @@ const v2 = divide(10, 0) catch |e| blk: { // inspect e
 };
 ```
 
+**`catch unreachable`** — unwrap a call that provably cannot fail at this call site. [`unreachable`](https://ziglang.org/documentation/0.16.0/#unreachable) asserts the error branch is never taken: in safe builds (Debug, ReleaseSafe) it panics with a stack trace; in ReleaseFast it is undefined behavior. It is Zig's equivalent of Rust's `.unwrap()` — use it only when the invariant is locally provable, like a divisor you can see is nonzero. For errors that can actually happen, use `try` or a real `catch` handler.
+
+```zig
+const v3 = divide(10, 2) catch unreachable; // b is 2, DivByZero is impossible
+```
+
 **`if`/`else` capture** — branch on success or error:
 
 ```zig

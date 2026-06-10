@@ -21,7 +21,7 @@ const s: []u32 = arr[1..3]; // len == 2, points at 20, 30
 const all: []u32 = arr[0..]; // entire array as a slice
 ```
 
-`[]T` is mutable; `[]const T` is read-only. You can only take a mutable slice of a `var` array.
+`[]T` is mutable; `[]const T` is read-only. You can only take a mutable slice of a `var` array. A `[]T` [coerces implicitly](https://ziglang.org/documentation/0.16.0/#Type-Coercion-Stricter-Qualification) to `[]const T` (adding `const` is always safe, the reverse is a compile error) — so take `[]const T` parameters in functions that only read.
 
 A mutable uninitialized buffer:
 
@@ -39,6 +39,18 @@ std.debug.print("{s}\n", .{greeting});
 ```
 
 Indexing a `[]const u8` yields bytes (`u8`), not Unicode codepoints — Zig strings are raw UTF-8.
+
+### String length
+
+A string's length is just the slice's `.len` field — no function call, no scan:
+
+```zig
+const greeting: []const u8 = "hello";
+greeting.len; // 5
+"zig".len;    // 3 — works on literals too; the 0 sentinel is not counted
+```
+
+Because strings are raw UTF-8, `.len` counts **bytes**, not characters: `"héllo".len` is `6` (the `é` takes two bytes). When you genuinely need the number of Unicode codepoints, use `std.unicode.utf8CountCodepoints("héllo")` — it returns `5` (and an error on invalid UTF-8). For a C-style many-item pointer with no length (`[*:0]const u8`, common at C boundaries), `std.mem.len(ptr)` scans to the 0 sentinel.
 
 ## Pointer kinds
 
@@ -61,17 +73,39 @@ p.* = 8;
 
 ## std.mem helpers
 
+### Cutting strings: the tokenize/split family
+
+Six functions cover every "cut this slice at delimiters" need, and the names compose from two choices. The **verb** decides what happens to empty pieces; the **suffix** decides what counts as a delimiter:
+
+|                                    | `Scalar` — one element | `Any` — any element of a set | `Sequence` — an exact substring |
+|------------------------------------|------------------------|------------------------------|---------------------------------|
+| **`tokenize`** — never yields `""` | [`tokenizeScalar`](https://ziglang.org/documentation/0.16.0/std/#std.mem.tokenizeScalar) | [`tokenizeAny`](https://ziglang.org/documentation/0.16.0/std/#std.mem.tokenizeAny) | [`tokenizeSequence`](https://ziglang.org/documentation/0.16.0/std/#std.mem.tokenizeSequence) |
+| **`split`** — keeps empty pieces   | [`splitScalar`](https://ziglang.org/documentation/0.16.0/std/#std.mem.splitScalar) | [`splitAny`](https://ziglang.org/documentation/0.16.0/std/#std.mem.splitAny) | [`splitSequence`](https://ziglang.org/documentation/0.16.0/std/#std.mem.splitSequence) |
+
+`tokenize*` collapses runs of delimiters and ignores leading/trailing ones — right for whitespace-style parsing, where `"a  b"` is two words no matter how many spaces separate them. `split*` cuts at *every* delimiter, so consecutive delimiters produce empty slices — right for record formats like CSV, where `"a,,b"` has a genuinely empty middle field.
+
 ```zig
-// Iterate words (skips consecutive delimiters)
-var it = std.mem.tokenizeScalar(u8, "a  b  c", ' ');
-while (it.next()) |word| { ... }
+// tokenizeScalar: one byte; runs collapse, edges ignored -> "a", "b", "c"
+var words = std.mem.tokenizeScalar(u8, "  a  b  c ", ' ');
+while (words.next()) |word| { ... }
 
-// Iterate fields (empty tokens between consecutive delimiters)
-var it2 = std.mem.splitScalar(u8, "a,,b", ',');
+// splitScalar: every comma cuts; empties kept            -> "a", "", "b"
+var fields = std.mem.splitScalar(u8, "a,,b", ',');
 
-// Split on ANY byte in a delimiter set (whitespace + punctuation, etc.)
-var it3 = std.mem.tokenizeAny(u8, "a, b;c", " ,;");
+// tokenizeAny: ANY byte of the set is a delimiter        -> "a", "b", "c"
+var loose = std.mem.tokenizeAny(u8, "a, b;c", " ,;");
 
+// splitSequence: the WHOLE substring is one delimiter    -> "one", "two", "", "three"
+var parts = std.mem.splitSequence(u8, "one=>two=>=>three", "=>");
+```
+
+All six return an iterator whose `next()` yields `?[]const u8` (`null` when exhausted). The iterators also support `peek()` (look at the next token without consuming it), `rest()` (everything not yet consumed, delimiters included), and `reset()` (start over). Every token is a slice *into the original buffer* — nothing is copied and nothing is allocated, which also means tokens are only valid as long as the input slice is.
+
+The `u8` first argument is the element type: these functions are generic, so you can just as well tokenize a `[]const u32` on a `0` separator. `u8` is simply the common case for strings.
+
+### Other common helpers
+
+```zig
 // Equality
 std.mem.eql(u8, "zig", "zig") // true
 
