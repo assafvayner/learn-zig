@@ -1,8 +1,8 @@
 # Summary
 
 [Introduction](introduction.md)
+[Setup & Hello](00-setup.md)
 
-- [Setup & Hello](00-setup.md)
 - [Values, Types & Control Flow](01-basics.md)
 - [Errors & Optionals](02-errors-optionals.md)
 - [Arrays, Slices & Strings](03-arrays-slices-strings.md)

@@ -102,4 +102,4 @@ The capture binds the payload of the active variant. For a pointer receiver use 
 
 - **01_vec2** — `Vec2` struct with `add`, `dot`, and `length` methods.
 - **02_shape_area** — tagged union `Shape` with an `area` function using `switch` capture.
-- **03_rpn** — RPN evaluator using a `[16]i64` array as a stack.
+- **03_rpn** — RPN evaluator combining all three: an `Op` enum with an `apply` method, a `Token` tagged union consumed with `switch` capture, and a `Stack` struct with pointer-receiver `push`/`pop` methods.
