@@ -15,11 +15,20 @@ test "alloc and free leaves no leaks" {
     //       and free it with defer alloc.free(buf).
     //       (Removing the free makes this test fail with a leak report —
     //       that's the teaching point of std.testing.allocator.)
-    _ = alloc;
+    const buf = try alloc.alloc(u8, 8);
+    defer alloc.free(buf);
+
+    for (0..8) |i| {
+        buf[i] = @intCast(i);
+    }
+    std.debug.assert(buf[3] == 3);
 }
 
 test "create and destroy leaves no leaks" {
     const alloc = std.testing.allocator;
     // TODO: alloc.create(u64), set the value, assert it, alloc.destroy(p).
-    _ = alloc;
+    const p = try alloc.create(u64);
+    p.* = 9999999;
+    std.debug.assert(p.* > 1000);
+    alloc.destroy(p);
 }

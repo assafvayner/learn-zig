@@ -10,7 +10,11 @@ const std = @import("std");
 fn firstEven(items: []const u32) ?u32 {
     // TODO: iterate over items; return the first value where v % 2 == 0
     //       return null if no even value found
-    _ = items;
+    for (items) |item| {
+        if (item % 2 == 0) {
+            return item;
+        }
+    }
     return null;
 }
 
@@ -22,8 +26,16 @@ pub fn main() void {
     //       otherwise print "first even: none\n"
     //       Hint: an `if` capture handles both cases per call without an early return —
     //       `if (firstEven(has_even)) |v| { ...print v... } else { ...print "none"... }`
-    _ = has_even;
+    if (firstEven(has_even)) |v| {
+        std.debug.print("first even: {d}\n", .{v});
+    } else {
+        std.debug.print("first even: none\n", .{});
+    }
 
     // TODO: same for no_even
-    _ = no_even;
+    if (firstEven(no_even)) |v| {
+        std.debug.print("first even: {d}\n", .{v});
+    } else {
+        std.debug.print("first even: none\n", .{});
+    }
 }

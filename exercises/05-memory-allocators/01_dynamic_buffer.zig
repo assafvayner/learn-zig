@@ -20,5 +20,13 @@ pub fn main() !void {
     //       (a bare `'a' + i` stays usize and won't fit in a u8).
     //       Print it with std.debug.print("{s}\n", .{buf}),
     //       and free it with defer alloc.free(buf).
-    _ = alloc;
+    const buf = try alloc.alloc(u8, 5);
+    defer alloc.free(buf);
+
+    var i: u8 = 0;
+    while (i < 5) : (i += 1) {
+        buf[i] = 'a' + i;
+    }
+
+    std.debug.print("{s}\n", .{buf});
 }

@@ -19,6 +19,12 @@ pub fn main() void {
     for (temps) |t| {
         // TODO: use a switch expression on `t` to produce a label string,
         // then print "{d}: {s}\n"
-        _ = t;
+        const label = switch (t) {
+            std.math.minInt(i32)...-1 => "freezing",
+            0...14 => "cold",
+            15...27 => "mild",
+            else => "hot",
+        };
+        std.debug.print("{d}: {s}\n", .{ t, label });
     }
 }

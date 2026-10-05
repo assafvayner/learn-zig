@@ -17,7 +17,6 @@ pub fn main(init: std.process.Init) !void {
     var buf: [1024]u8 = undefined;
     var fw: std.Io.File.Writer = .init(.stdout(), io, &buf);
     const out = &fw.interface;
-    // TODO: print "Hello, Zig!\n" via `out`
-    // TODO: flush `out`
-    _ = out;
+    try out.print("Hello, Zig\n", .{});
+    try out.flush();
 }

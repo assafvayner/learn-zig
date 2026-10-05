@@ -11,5 +11,13 @@ pub fn main() void {
     var buf: [msg.len]u8 = undefined;
     // TODO: iterate msg with index, shift each letter by 3 within its case
     //       ('a'..'z' or 'A'..'Z'), copy non-letters unchanged, then print buf.
-    _ = &buf;
+    for (msg, 0..msg.len) |c, i| {
+        const new_char = switch (c) {
+            'a'...'w', 'A'...'W' => c + 3,
+            'x'...'z', 'X'...'Z' => c + 3 - 26,
+            else => c,
+        };
+        buf[i] = new_char;
+    }
+    std.debug.print("{s}\n", .{buf});
 }

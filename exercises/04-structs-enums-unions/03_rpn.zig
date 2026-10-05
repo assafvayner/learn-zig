@@ -22,10 +22,12 @@ const Op = enum {
     fn apply(self: Op, a: i64, b: i64) i64 {
         // TODO: switch on self and return a + b, a - b, a * b, or
         // @divTrunc(a, b) for the matching variant.
-        _ = self;
-        _ = a;
-        _ = b;
-        return 0;
+        return switch (self) {
+            .add => a + b,
+            .sub => a - b,
+            .mul => a * b,
+            .div => @divTrunc(a, b),
+        };
     }
 };
 
@@ -41,14 +43,16 @@ const Stack = struct {
     // Pointer receivers: push and pop must mutate the original, not a copy.
     fn push(self: *Stack, value: i64) void {
         // TODO: store value at self.top, then bump self.top.
-        _ = self;
-        _ = value;
+        // Nit: boundary check on top needed
+        self.items[self.top] = value;
+        self.top += 1;
     }
 
     fn pop(self: *Stack) i64 {
         // TODO: decrement self.top, then return the value that was on top.
-        _ = self;
-        return 0;
+        // Nit: boundary check that not empty needed, and reset slot
+        self.top -= 1;
+        return self.items[self.top];
     }
 };
 
@@ -70,8 +74,16 @@ pub fn main() void {
         //   .number => |n|  push n
         //   .op     => |op| pop b, then pop a, then push op.apply(a, b)
         // (the value popped second is the left operand)
-        _ = tok;
-        _ = &stack;
+        switch (tok) {
+            .number => |n| stack.push(n),
+            .op => |op| {
+                // Nit: stack length checking needed
+                const a = stack.pop();
+                const b = stack.pop();
+                const res = op.apply(a, b);
+                stack.push(res);
+            },
+        }
     }
 
     const result = stack.pop();

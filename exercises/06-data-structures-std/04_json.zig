@@ -17,6 +17,8 @@ pub fn main() !void {
 
     // TODO: parse `text` into Info using std.json.parseFromSlice
     //       print "name={s} year={d}" from the parsed value
-    _ = text;
-    _ = alloc;
+    const info = try std.json.parseFromSlice(Info, alloc, text, .{});
+    defer info.deinit();
+
+    std.debug.print("name={s} year={d}\n", .{ info.value.name, info.value.year });
 }

@@ -13,9 +13,11 @@ pub fn main() void {
 
     // TODO: parse `good` with std.fmt.parseInt(i32, good, 10), defaulting to 0 on error
     //       print the result with "{d}\n"
-    _ = good;
+    const good_result = std.fmt.parseInt(i32, good, 10) catch unreachable;
+    std.debug.print("{d}\n", .{good_result});
 
     // TODO: parse `bad` with std.fmt.parseInt(i32, bad, 10), defaulting to 0 on error
     //       print the result with "{d}\n"
-    _ = bad;
+    const bad_result = std.fmt.parseInt(i32, bad, 10) catch 0;
+    std.debug.print("{d}\n", .{bad_result});
 }

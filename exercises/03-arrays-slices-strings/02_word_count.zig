@@ -10,5 +10,11 @@ pub fn main() void {
     const line = "the quick brown fox";
     // TODO: use std.mem.tokenizeScalar(u8, line, ' ') to iterate words,
     //       count them, print the count, and assert count == 4.
-    _ = line;
+    var it = std.mem.tokenizeScalar(u8, line, ' ');
+
+    var count: usize = 0;
+    while (it.next()) |_| {
+        count += 1;
+    }
+    std.debug.assert(count == 4);
 }

@@ -10,12 +10,15 @@ const std = @import("std");
 
 fn maxOf(comptime T: type, a: T, b: T) T {
     // TODO: return the larger of a and b
-    _ = a;
-    _ = b;
-    return undefined;
+    if (a >= b) {
+        return a;
+    }
+    return b;
 }
 
 pub fn main() void {
     // TODO: call maxOf(i32, 3, 7) and maxOf(f64, 2.5, 1.5)
+    std.debug.print("{d}\n", .{maxOf(i32, 3, 7)});
     // TODO: print each result with std.debug.print
+    std.debug.print("{d:.1}\n", .{maxOf(f64, 2.5, 1.5)});
 }

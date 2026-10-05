@@ -16,14 +16,16 @@ fn area(s: Shape) f64 {
     // TODO: switch on s, capturing the payload of each variant, and return the area.
     // circle: π * r²  (use std.math.pi)
     // rect:   w * h
-    _ = s;
-    return 0;
+    return switch (s) {
+        .circle => |r| std.math.pi * r * r,
+        .rect => |d| d.w * d.h,
+    };
 }
 
 pub fn main() void {
     const c = Shape{ .circle = 2.0 };
     const r = Shape{ .rect = .{ .w = 3, .h = 4 } };
     // TODO: print "circle area = {d:.2}" and "rect area   = {d:.2}"
-    _ = c;
-    _ = r;
+    std.debug.print("circle are = {d:.2}\n", .{area(c)});
+    std.debug.print("rect area  = {d:.2}\n", .{area(r)});
 }

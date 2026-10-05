@@ -15,6 +15,10 @@ pub fn main() !void {
     defer list.deinit(alloc);
 
     // TODO: iterate 1..=5, append the square of each number to `list`
+    for (1..6) |i| {
+        try list.append(alloc, @intCast(i * i));
+    }
 
     // TODO: print list.items with {any}
+    std.debug.print("{any}\n", .{list.items});
 }

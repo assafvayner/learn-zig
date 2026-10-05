@@ -10,10 +10,20 @@ const std = @import("std");
 fn isPalindrome(s: []const u8) bool {
     // TODO: compare mirrored characters using std.ascii.toLower;
     //       return true if all pairs match, false otherwise.
-    _ = s;
-    return false;
+    var i: usize = 0;
+    const len = s.len;
+    while (i < len / 2) : (i += 1) {
+        const left = std.ascii.toLower(s[i]);
+        const right = std.ascii.toLower(s[len - i - 1]);
+        if (right != left) {
+            return false;
+        }
+    }
+    return true;
 }
 
 pub fn main() void {
     // TODO: print the results for "Racecar" and "hello".
+    std.debug.print("isPalindrome(\"Racecar\"): {}\n", .{isPalindrome("Racecar")});
+    std.debug.print("isPalindrome(\"hello\"): {}\n", .{isPalindrome("hello")});
 }

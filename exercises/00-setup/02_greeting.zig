@@ -14,6 +14,5 @@ pub fn main() void {
     const name = "world";
     const year: u32 = 2026;
     // TODO: use std.debug.print to print "Hello, {s}! It is {d}.\n"
-    _ = name;
-    _ = year;
+    std.debug.print("Hello, {s}! It is {d}.\n", .{name, year});
 }

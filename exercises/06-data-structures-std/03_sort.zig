@@ -8,10 +8,11 @@ const std = @import("std");
 
 pub fn main() void {
     // Change `const` to `var` once you add the sort call (sort mutates the slice).
-    const nums = [_]i32{ 5, 3, 8, 1, 9, 2 };
+    var nums = [_]i32{ 5, 3, 8, 1, 9, 2 };
 
     // TODO: sort nums in descending order with std.sort.pdq
+    std.sort.pdq(i32, &nums, {}, std.sort.asc(i32));
 
     // TODO: print nums with {any}
-    _ = nums;
+    std.debug.print("{any}\n", .{nums});
 }

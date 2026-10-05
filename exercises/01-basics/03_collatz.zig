@@ -16,6 +16,14 @@ pub fn main() void {
     var steps: u64 = 0;
     // TODO: loop until `n` reaches 1, applying the Collatz rule each iteration,
     // incrementing `steps`. Then assert steps == 111 and print the result.
-    _ = start;
-    _ = steps;
+    var n = start;
+    while (n != 1) {
+        steps += 1;
+        if (n % 2 == 0) {
+            n /= 2;
+        } else {
+            n = 3 * n + 1;
+        }
+    }
+    std.debug.print("{d} reaches 1 in {d} steps\n", .{ start, steps });
 }

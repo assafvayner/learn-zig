@@ -12,8 +12,12 @@ const std = @import("std");
 const table: [15]u64 = blk: {
     var fib: [15]u64 = undefined;
     // TODO: seed fib[0] = 0 and fib[1] = 1
+    fib[0] = 0;
+    fib[1] = 1;
     // TODO: loop from index 2 to 14 and fill each entry
-    _ = &fib; // remove once you fill in the TODOs above
+    for (2..15) |i| {
+        fib[i] = fib[i - 1] + fib[i - 2];
+    }
     break :blk fib;
 };
 

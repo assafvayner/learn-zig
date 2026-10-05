@@ -21,5 +21,21 @@ pub fn main() !void {
     //       alloc.create(Node), setting node.* = .{ .value = v, .next = head },
     //       and updating head = node.
     //       Then traverse head and print each value space-separated.
-    _ = alloc;
+    var head: ?*Node = null;
+    var i: i32 = 3;
+    while (i >= 1) : (i -= 1) {
+        const new_node = try alloc.create(Node);
+        new_node.* = Node{ .value = i, .next = head };
+        head = new_node;
+    }
+
+    var curr: ?*Node = head;
+    while (true) {
+        if (curr) |c| {
+            std.debug.print("{d}\n", .{c.value});
+            curr = c.next;
+        } else {
+            break;
+        }
+    }
 }

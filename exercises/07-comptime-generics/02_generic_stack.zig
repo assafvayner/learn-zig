@@ -17,14 +17,14 @@ fn Stack(comptime T: type, comptime cap: usize) type {
 
         fn push(self: *Self, v: T) void {
             // TODO: store v at items[self.len] and increment len
-            _ = self;
-            _ = v;
+            self.items[self.len] = v;
+            self.len += 1;
         }
 
         fn pop(self: *Self) ?T {
             // TODO: return null if empty, otherwise decrement len and return the top item
-            _ = self;
-            return null;
+            self.len -= 1;
+            return self.items[self.len];
         }
     };
 }
@@ -35,4 +35,7 @@ pub fn main() void {
     s.push(20);
     s.push(30);
     // TODO: pop three times and print each with std.debug.print("{?d}\n", .{...})
+    std.debug.print("{?d}\n", .{s.pop()});
+    std.debug.print("{?d}\n", .{s.pop()});
+    std.debug.print("{?d}\n", .{s.pop()});
 }
